@@ -9,6 +9,9 @@
         <mat-error *ngIf="poneyForm.controls['name'].hasError('required')">
             Ce champ est requis
         </mat-error>
+        <mat-error *ngIf="poneyForm.controls['name'].hasError('isNotUnique')">
+            Le nom est déjà pris
+        </mat-error>
     </mat-form-field>
 
     <br>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { map, Observable } from 'rxjs';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'amb-poney-create',
@@ -9,23 +11,26 @@ import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/f
 export class PoneyCreateComponent implements OnInit {
   
   poneyForm: FormGroup = new FormGroup({
-    name: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required], [this.isNameUnique.bind(this)]),
     image: new FormControl('', [Validators.required, this.isGif]),
   })
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
-    // Creer un validateur asynchrone isNameUnique
-    // pour le champ name
-    // qui va verifier dans la DB si le name n'existe pas déjà
-    // en passant par le DataService
   }
 
   isGif(control: FormControl): ValidationErrors | null {
     return new RegExp(/^.+\.gif$/i).test(control.value) ? null : {
       isNotGif: true
     }
+  }
+
+  isNameUnique(control: AbstractControl): Observable<ValidationErrors | null> {
+    return this.dataService.isNameUnique(control.value)
+      .pipe(map(isUnique => isUnique ? null : {
+        isNotUnique: true
+      }))
   }
 
   handleSubmit() {

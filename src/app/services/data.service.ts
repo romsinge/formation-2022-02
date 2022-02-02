@@ -22,7 +22,13 @@ export class DataService {
     return this.getRaces().pipe(map(raceDatas => raceDatas.find(raceData => raceData.id === id)))
   }
 
-  poneyDatas: PoneyData[] = []
-
-  raceDatas: RaceData[] = []
+  isNameUnique(name: string): Observable<boolean> {
+    return this.getPoneys().pipe(
+      map(poneyDatas => {
+        return !poneyDatas.some(poneyData => {
+          return poneyData.name === name
+        })
+      })
+    )
+  }
 }
