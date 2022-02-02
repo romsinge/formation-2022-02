@@ -12,9 +12,10 @@ import { IsRacingPipe } from './pipes/is-racing.pipe';
 import { RaceListComponent } from './components/race-list/race-list.component';
 import { RaceCreateComponent } from './components/race-create/race-create.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PoneyCreateComponent } from './components/poney-create/poney-create.component';
+import { HttpInterceptorService } from './services/http.interceptor';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,13 @@ import { PoneyCreateComponent } from './components/poney-create/poney-create.com
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
