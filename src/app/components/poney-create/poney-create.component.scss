@@ -1,0 +1,12 @@
+:host {
+    display: block;
+    padding: 40px;
+
+    .ng-invalid.ng-touched {
+        border: dotted 1px pink;
+    }
+
+    .ng-valid {
+        border: dotted 1px green;
+    }
+}

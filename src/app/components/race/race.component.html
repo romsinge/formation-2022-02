@@ -1,0 +1,16 @@
+<ng-container *ngIf="raceData$ | async as raceData">
+    <mat-toolbar>{{ raceData?.name }}</mat-toolbar>
+
+    <amb-poney
+        *ngFor="let poneyData of poneyDatas$ | async | isRacing:raceData!.poneyIds!"
+        (win)="handleWin($event)"
+        [poneyData]="poneyData"
+        ambRainbow="silver"
+        #poneyChildren
+    ></amb-poney>
+
+    <pre>
+        {{ poneyDatas$ | async | isRacing:raceData!.poneyIds! | json }}
+    </pre>
+</ng-container>
+

@@ -1,0 +1,38 @@
+<form (submit)="handleSubmit()" #formRef="ngForm">
+    <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input
+            matInput
+            placeholder="Name"
+            required
+            [ngModel]="raceData.name"
+            (ngModelChange)="raceData.name = $event"
+            name="name"
+            #nameInput="ngModel"
+        >
+        <mat-error *ngIf="nameInput.hasError('required')">
+            Ce champ est requis
+        </mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="outline">
+        <mat-label>Ponies</mat-label>
+        <mat-select
+            placeholder="Ponies"
+            multiple
+            required
+            [(ngModel)]="raceData.poneyIds"
+            name="poneyIds"
+        >
+            <mat-option *ngFor="let poneyData of poneyDatas$ | async" [value]="poneyData.id">
+                {{ poneyData.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button color="primary" type="submit" [disabled]="formRef.invalid">Save</button>
+</form>
+
+<pre>
+    {{ raceData | json }}
+</pre>

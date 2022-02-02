@@ -1,0 +1,49 @@
+{
+  "poneys": [
+    {
+      "id": "0",
+      "name": "Romain",
+      "image": "https://ng-ponyracer.ninja-squad.com/assets/images/pony-blue-running.gif",
+      "distance": 0
+    },
+    {
+      "id": "1",
+      "name": "Jeremy",
+      "image": "https://ng-ponyracer.ninja-squad.com/assets/images/pony-orange-running.gif",
+      "distance": 0
+    },
+    {
+      "id": "2",
+      "name": "Justine",
+      "image": "https://ng-ponyracer.ninja-squad.com/assets/images/pony-purple-running.gif",
+      "distance": 0
+    }
+  ],
+  "races": [
+    {
+      "id": "0",
+      "name": "Pantin",
+      "poneyIds": [
+        "0",
+        "1"
+      ]
+    },
+    {
+      "id": "1",
+      "name": "Le Mans",
+      "poneyIds": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "name": "Paris",
+      "poneyIds": [
+        "0",
+        "1",
+        "2"
+      ],
+      "id": "oskCZUP"
+    }
+  ]
+}
